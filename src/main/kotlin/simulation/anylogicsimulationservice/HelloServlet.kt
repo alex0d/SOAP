@@ -2,6 +2,7 @@ package simulation.anylogicsimulationservice
 
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import jakarta.xml.ws.Endpoint
 
 @WebServlet(name = "helloServlet", value = ["/hello-servlet"])
 class HelloServlet : HttpServlet() {

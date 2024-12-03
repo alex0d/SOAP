@@ -11,8 +11,6 @@ import jakarta.xml.ws.FaultAction
 
 @WebService(
     serviceName = "AnyLogicWebService",
-    endpointInterface = "simulation.AnyLogicWebServiceApplication",
-    targetNamespace = "http://localhost:8080/wsdl",
     portName = "AnyLogicModelApplicationPortSOAP"
 )
 @BindingType(jakarta.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING)
@@ -32,6 +30,6 @@ interface AnyLogicWebServiceApplication {
     @Throws(AnyLogicWebServiceFaultMessage::class)
     fun applyAnyLogicModel(
         @WebParam(name = "AnyLogicModelType")
-        anyLogicModel: AnyLogicModelType
+        anyLogicModelType: AnyLogicModelType
     ): AnyLogicModelResponse?
 }
