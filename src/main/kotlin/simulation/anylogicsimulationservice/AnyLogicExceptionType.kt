@@ -1,3 +1,5 @@
 package simulation.anylogicsimulationservice
 
-class AnyLogicExceptionType
+class AnyLogicExceptionType {
+    constructor()
+}

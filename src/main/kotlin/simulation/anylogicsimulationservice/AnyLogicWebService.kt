@@ -6,16 +6,19 @@ import pr11.Main
 import java.util.*
 import kotlin.jvm.Throws
 
-@WebService(serviceName = "AnyLogicWebService",
-    targetNamespace = "http://localhost:8080/AnyLogicWebService/wsdl",
-    portName = "AnyLogicModelApplicationPortSOAP")
+@WebService(
+    serviceName = "AnyLogicWebService",
+    portName = "AnyLogicModelApplicationPortSOAP",
+    endpointInterface = "simulation.anylogicsimulationservice.AnyLogicWebService",
+    targetNamespace = "http://localhost:8080/wsdl",
+)
 class AnyLogicWebService : AnyLogicWebServiceApplication {
     @Throws(AnyLogicWebServiceFaultMessage::class)
-    override fun applyAnyLogicModel(anyLogicModel: AnyLogicModelType): AnyLogicModelResponse? {
+    override fun applyAnyLogicModel(anyLogicModelType: AnyLogicModelType): AnyLogicModelResponse? {
         return try {
             // Взаимодействие с моделью AnyLogic
             val faultInfo = AnyLogicExceptionType()
-            val random = java.util.Random(System.currentTimeMillis())
+            val random = Random(System.currentTimeMillis())
 
             val experiment = CustomExperiment(null)
             val engine = experiment.createEngine()
@@ -40,9 +43,9 @@ class AnyLogicWebService : AnyLogicWebServiceApplication {
                 realTimeMode = false
             }
             main.apply {
-                Сценарий = anyLogicModel.scenarioNumber
-                Темп_бурения = anyLogicModel.drillingRate
-                Цена_на_нефть = anyLogicModel.oilPrice
+                Сценарий = anyLogicModelType.scenarioNumber
+                Темп_бурения = anyLogicModelType.drillingRate
+                Цена_на_нефть = anyLogicModelType.oilPrice
                 Курс_доллара = 100.0
             }
             while (engine.time < 30) {
